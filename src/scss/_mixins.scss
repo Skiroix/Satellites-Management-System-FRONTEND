@@ -1,0 +1,66 @@
+@mixin before($pos: absolute, $content: "", $display: block) {
+	&::before {
+		content: $content;
+		position: $pos;
+		display: $display;
+		@content;
+	}
+}
+
+@mixin after($pos: absolute, $content: "", $display: block) {
+	&::after {
+		content: $content;
+		position: $pos;
+		display: $display;
+		@content;
+	}
+}
+
+@mixin scrollbar {
+	scrollbar-width: thick;
+	scrollbar-color: $clr-primary transparent;
+
+	/* Works on Chrome, Edge, and Safari */
+	&::-webkit-scrollbar {
+		width: 0.6rem;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $clr-primary;
+		border-radius: $border-radius-2;
+	}
+}
+
+@mixin apply-focus($container: false, $inverse: false) {
+	outline: none;
+	border: none;
+	border: 2px solid transparent !important;
+	@if $container {
+		&:focus-within {
+			@if $inverse {
+				border-color: rgba($clr-white, 1) !important;
+			} @else {
+				border-color: rgba($clr-primary, 1) !important;
+			}
+			@content;
+		}
+	} @else {
+		&:focus {
+			@if $inverse {
+				border-color: rgba($clr-white, 1) !important;
+			} @else {
+				border-color: rgba($clr-primary, 1) !important;
+			}
+			@content;
+		}
+	}
+}
+
+@mixin mq($mq-breakpoint, $mq-breakpoints: $breakpoints) {
+	@if map-has-key($mq-breakpoints, $mq-breakpoint) {
+		$mq-breakpoint: map-get($mq-breakpoints, $mq-breakpoint);
+	}
+	@media screen and (min-width: #{$mq-breakpoint}) {
+		@content;
+	}
+}
