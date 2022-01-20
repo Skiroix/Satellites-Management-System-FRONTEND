@@ -9,6 +9,7 @@ import { validateEmail, validatePassword } from "@/composables/validators";
 import BaseFormCountries from "@/components/BaseFormCountries.vue";
 import { useStore } from "@/store";
 import { useRouter } from "vue-router";
+import getCountries from "@/composables/getCountries";
 
 const { dispatch } = useStore();
 const router = useRouter();
@@ -152,20 +153,27 @@ watch(
 const onSubmit = async () => {
 	try {
 		const errorsHappened = Object.values(errorCheck);
-		console.log(errorsHappened);
 		if (errorsHappened.some((err) => err)) {
 			console.log("Can't submit form.");
-			return;
+			return; // this whole if is kinda pointless bc the watcher does the same work
 		}
 		const { fName, lName, email, password, country, isRedButton } = form;
 
+		const countries = getCountries();
+		const pair = Object.entries(countries).filter((pair) => {
+			if (pair[1].toLowerCase().trim() === country.toLowerCase().trim())
+				return true;
+			else return false;
+		});
+		if (pair.length < 1) throw new Error(`${country} doesn't exist.`);
+		const key = pair[0][0];
 		const fullName = `${fName} ${lName}`;
 
 		const requestBody = {
 			fullName,
 			email,
 			password,
-			country,
+			country: key,
 			isRedButton,
 		};
 
@@ -190,13 +198,13 @@ const onSubmit = async () => {
 				<div class="form-group">
 					<base-form-input
 						label="First name"
-						v-model="form.fName"
+						v-model.trim="form.fName"
 						:error="formErrors.fName"
 						field-id="field-first-name"
 					/>
 					<base-form-input
 						label="Last name"
-						v-model="form.lName"
+						v-model.trim="form.lName"
 						:error="formErrors.lName"
 						field-id="field-last-name"
 					/>
@@ -205,21 +213,21 @@ const onSubmit = async () => {
 				<base-form-input
 					label="Email"
 					type="text"
-					v-model="form.email"
+					v-model.trim="form.email"
 					:error="formErrors.email"
 					field-id="field-email"
 				/>
 				<base-form-input
 					label="Password"
 					type="password"
-					v-model="form.password"
+					v-model.trim="form.password"
 					:error="formErrors.password"
 					field-id="field-password"
 				/>
 				<base-form-input
 					label="Confirm password"
 					type="password"
-					v-model="form.confirmPassword"
+					v-model.trim="form.confirmPassword"
 					:error="formErrors.confirmPassword"
 					field-id="field-confirm-password"
 				/>

@@ -127,14 +127,14 @@ const onSubmit = async () => {
 				<base-form-input
 					label="Email"
 					type="text"
-					v-model="form.email"
+					v-model.trim="form.email"
 					:error="formErrors.email"
 					field-id="field-email"
 				/>
 				<base-form-input
 					label="Password"
 					type="password"
-					v-model="form.password"
+					v-model.trim="form.password"
 					:error="formErrors.password"
 					field-id="field-password"
 				/>
