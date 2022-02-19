@@ -1,10 +1,18 @@
-# Vue 3, Typescript & Vite
-
-Quick start template with Vuex, Vue-Router, eslint & prettier.
-The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-### Recommended
-- VSCode + Volar
-
-### Type Support For .vue Imports in TS
-Since TypeScript cannot handle type information for .vue imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in .vue imports (for example to get props validation when using manual h(...) calls), you can enable Volar's .vue type support plugin by running Volar: Switch TS Plugin on/off from VSCode command palette.
+# Satellites-Management-System
+[live version](https://suspicious-clarke-c32eb8.netlify.app/satellites)
+---
+##  TECHNOLOGY
+### Main
+* TypeScript
+* Vue 3
+* Vuex
+* Vue Router
+### Other
+* Fetch API
+* Vue 3 Composition API (Script Setup)
+---
+##  WHATS & HOWS
+* Create or log in to your account on register/login page. 
+* Authorized you are able to add a new satellite, click on the "ADD SATELLITE" button and submit the form. Your satellite was successfuly assigned to your account Mr.President (:
+* Want to change some details of your satellites? No problem! Just click on the "update" button and the appropriate panel will be presented to you.
+* If there is a need to delete a particular satellite just click on a "delete" button and the satellite will be removed immediately.
