@@ -7,6 +7,7 @@
 * Vue 3
 * Vuex
 * Vue Router
+* SCSS
 ### Other
 * Fetch API
 * Vue 3 Composition API (Script Setup)
